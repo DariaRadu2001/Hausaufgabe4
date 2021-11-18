@@ -80,6 +80,7 @@ public class LehrerRepository extends InMemoryRepository<Lehrer> implements File
         return repoList;
     }
 
+
     @Override
     public void writeToFile() throws IOException {
 
@@ -90,6 +91,7 @@ public class LehrerRepository extends InMemoryRepository<Lehrer> implements File
         writer.writeValue(new File("lehrer.json"), repoList);
 
     }
+
 
     @Override
     public Lehrer findOne(Long id) throws IOException {
@@ -123,6 +125,7 @@ public class LehrerRepository extends InMemoryRepository<Lehrer> implements File
 
         return null;
     }
+
 
     @Override
     public boolean delete(Long idLehrer) throws IllegalAccessException, IOException {
@@ -159,4 +162,13 @@ public class LehrerRepository extends InMemoryRepository<Lehrer> implements File
         return obj;
     }
 
+
+    public boolean loschenKurs(Lehrer lehrer,Kurs kurs) throws IOException {
+        if(!lehrer.getKurse().contains(kurs.getID()))
+            return false;
+
+        lehrer.loschenKurs(kurs);
+        writeToFile();
+        return true;
+    }
 }

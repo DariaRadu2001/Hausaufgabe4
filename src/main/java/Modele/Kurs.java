@@ -30,6 +30,15 @@ public class Kurs implements Comparable<Kurs>{
         this.ECTS = ECTS;
     }
 
+    public Kurs(long ID,int ECTS) {
+        this.ID = ID;
+        this.name = "";
+        this.lehrer = 0;
+        this.maximaleAnzahlStudenten = 0;
+        this.listeStudenten = new ArrayList<>();
+        this.ECTS = ECTS;
+    }
+
     public long getID() {
         return ID;
     }

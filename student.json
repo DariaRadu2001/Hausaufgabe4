@@ -2,17 +2,17 @@
   "vorname" : "Daria",
   "nachname" : "Radu",
   "studentID" : 1,
-  "totalKredits" : 30,
-  "angeschriebeneKurse" : [ 1, 2, 3, 4 ],
-  "notwendigeKredits" : 0,
-  "anzahlKurse" : 4
+  "totalKredits" : 10,
+  "angeschriebeneKurse" : [ 2, 3, 4 ],
+  "notwendigeKredits" : 20,
+  "anzahlKurse" : 3
 }, {
   "vorname" : "Mihai",
   "nachname" : "Pop",
   "studentID" : 2,
-  "totalKredits" : 10,
-  "angeschriebeneKurse" : [ 1 ],
-  "notwendigeKredits" : 20,
+  "totalKredits" : 15,
+  "angeschriebeneKurse" : [ 6 ],
+  "notwendigeKredits" : 15,
   "anzahlKurse" : 1
 }, {
   "vorname" : "Ana",
