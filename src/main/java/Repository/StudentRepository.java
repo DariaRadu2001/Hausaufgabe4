@@ -203,9 +203,9 @@ public class StudentRepository extends InMemoryRepository<Student> implements Fi
     }
 
 
-    public void andernECTS(int ECTS, Kurs kurs, int oldECTS) throws IOException {
+    public void andernECTS(int ECTS, Long idKurs, int oldECTS) throws IOException {
         for (Student student : repoList) {
-            if (student.getAngeschriebeneKurse().contains(kurs.getID())) {
+            if (student.getAngeschriebeneKurse().contains(idKurs)) {
                 int neueAnzahlKredits = student.getTotalKredits() + (ECTS - oldECTS);
                 student.setTotalKredits(neueAnzahlKredits);
                 this.update(student);
@@ -233,11 +233,6 @@ public class StudentRepository extends InMemoryRepository<Student> implements Fi
             writeToFile();
         }
     }
-
-
-
-
-
 
 
 }

@@ -2,7 +2,6 @@ package Modele;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Objects;
 
 public class Student extends Person implements Comparable<Student>{
 
@@ -113,13 +112,7 @@ public class Student extends Person implements Comparable<Student>{
 
     @Override
     public int compareTo(Student o) {
-        if(this.getAnzahlKurse() < o.getAnzahlKurse())
-            return -1;
-
-        if(this.getAnzahlKurse() == o.getAnzahlKurse())
-            return 0;
-
-        return 1;
+        return Integer.compare(this.getAnzahlKurse(), o.getAnzahlKurse());
 
     }
 

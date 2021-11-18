@@ -17,5 +17,11 @@ public interface FileRepository<T> extends ICrudRepository<T>{
      */
     void writeToFile() throws IOException;
 
+    /**
+     * sucht in dem File, ob ein Objekt existiert mit Hilfe eines IDs
+     * @param id
+     * @return das Objekt,wenn man es findet
+     * @throws IOException das Objekt existiert nicht
+     */
     T findOne(Long id) throws IOException;
 }

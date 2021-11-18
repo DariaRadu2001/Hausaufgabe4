@@ -112,7 +112,6 @@ public class Kurs implements Comparable<Kurs>{
 
     /**
      * hinzufügt ein bestimmter Student in der Liste der angemeldeten Studenten
-     * @param student
      */
     public void addStudent(Student student)
     {
@@ -140,10 +139,10 @@ public class Kurs implements Comparable<Kurs>{
     }
 
     /**
-     * vergleicht 2 Kurse nach dem Anzahl der freien Platzen
+     * vergleicht 2 Kurse nach der Anzahl das freie Platzen
      * @param o (Kurs2)
      * @return 1, wenn Kurs1 mehrere Platzen hat
-     * @return -1, wenn Kurs1 weingere Platzen hat
+     * @return -1, wenn Kurs1 weniger Platzen hat
      * @return 0, wenn Kurs1 = Kurs2 beim Anzahl freien Platzen
      */
     @Override
