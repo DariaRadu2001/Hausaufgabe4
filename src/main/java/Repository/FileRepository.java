@@ -17,5 +17,5 @@ public interface FileRepository<T> extends ICrudRepository<T>{
      */
     void writeToFile() throws IOException;
 
-    Kurs findOne(Long id) throws IOException;
+    T findOne(Long id) throws IOException;
 }

@@ -2,20 +2,19 @@ package Modele;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Objects;
 
 public class Lehrer extends Person{
 
     private List<Long> kurse;
-    private int lehrerID;
+    private long lehrerID;
 
-    public Lehrer(String vorname, String nachname, List<Long> kurse, int lehrerID) {
+    public Lehrer(String vorname, String nachname, List<Long> kurse, long lehrerID) {
         super(vorname, nachname);
         this.kurse = kurse;
         this.lehrerID = lehrerID;
     }
 
-    public Lehrer(String vorname, String nachname, int lehrerID) {
+    public Lehrer(String vorname, String nachname, long lehrerID) {
         super(vorname, nachname);
         this.kurse = new ArrayList<>();
         this.lehrerID = lehrerID;
@@ -29,11 +28,11 @@ public class Lehrer extends Person{
         this.kurse = kurse;
     }
 
-    public int getLehrerID() {
+    public long getLehrerID() {
         return lehrerID;
     }
 
-    public void setLehrerID(int lehrerID) {
+    public void setLehrerID(long lehrerID) {
         this.lehrerID = lehrerID;
     }
 

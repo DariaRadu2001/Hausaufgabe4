@@ -1,0 +1,28 @@
+[ {
+  "name" : "Baze de date",
+  "lehrer" : 1,
+  "maximaleAnzahlStudenten" : 30,
+  "listeStudenten" : [ ],
+  "id" : 1,
+  "ects" : 10,
+  "anzahlFreienPlatze" : 30,
+  "tFrei" : true
+}, {
+  "name" : "MAP",
+  "lehrer" : 2,
+  "maximaleAnzahlStudenten" : 25,
+  "listeStudenten" : [ 2, 3 ],
+  "id" : 2,
+  "ects" : 5,
+  "anzahlFreienPlatze" : 23,
+  "tFrei" : true
+}, {
+  "name" : "DSA",
+  "lehrer" : 1,
+  "maximaleAnzahlStudenten" : 30,
+  "listeStudenten" : [ 3, 4 ],
+  "id" : 3,
+  "ects" : 4,
+  "anzahlFreienPlatze" : 28,
+  "tFrei" : true
+} ]

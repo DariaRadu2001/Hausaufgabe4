@@ -1,0 +1,25 @@
+[ {
+  "vorname" : "Daria",
+  "nachname" : "Radu",
+  "studentID" : 1,
+  "totalKredits" : 30,
+  "angeschriebeneKurse" : [ 1, 2, 3, 4 ],
+  "notwendigeKredits" : 0,
+  "anzahlKurse" : 4
+}, {
+  "vorname" : "Mihai",
+  "nachname" : "Pop",
+  "studentID" : 2,
+  "totalKredits" : 10,
+  "angeschriebeneKurse" : [ 1 ],
+  "notwendigeKredits" : 20,
+  "anzahlKurse" : 1
+}, {
+  "vorname" : "Ana",
+  "nachname" : "Mica",
+  "studentID" : 3,
+  "totalKredits" : 0,
+  "angeschriebeneKurse" : [ ],
+  "notwendigeKredits" : 30,
+  "anzahlKurse" : 0
+} ]
