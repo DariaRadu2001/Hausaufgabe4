@@ -64,9 +64,9 @@ public class StudentController implements Controller<Student>{
     }
 
 
-    public void filter()
+    public List<Student> filter()
     {
-        studentenRepo.filterList();
+        return studentenRepo.filterList();
     }
 
 

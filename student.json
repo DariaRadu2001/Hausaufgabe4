@@ -1,25 +1,17 @@
 [ {
-  "vorname" : "Daria",
-  "nachname" : "Radu",
-  "studentID" : 1,
-  "totalKredits" : 10,
-  "angeschriebeneKurse" : [ 2, 3, 4 ],
-  "notwendigeKredits" : 20,
-  "anzahlKurse" : 3
-}, {
-  "vorname" : "Mihai",
-  "nachname" : "Pop",
+  "vorname" : "daria",
+  "nachname" : "radu",
   "studentID" : 2,
-  "totalKredits" : 15,
-  "angeschriebeneKurse" : [ 6 ],
-  "notwendigeKredits" : 15,
-  "anzahlKurse" : 1
+  "totalKredits" : 0,
+  "angeschriebeneKurse" : [ ],
+  "anzahlKurse" : 0,
+  "notwendigeKredits" : 30
 }, {
-  "vorname" : "Ana",
-  "nachname" : "Mica",
+  "vorname" : "Bogdan",
+  "nachname" : "Todiras",
   "studentID" : 3,
   "totalKredits" : 0,
   "angeschriebeneKurse" : [ ],
-  "notwendigeKredits" : 30,
-  "anzahlKurse" : 0
+  "anzahlKurse" : 0,
+  "notwendigeKredits" : 30
 } ]

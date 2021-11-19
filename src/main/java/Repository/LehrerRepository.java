@@ -181,4 +181,17 @@ public class LehrerRepository extends InMemoryRepository<Lehrer> implements File
         }
         return false;
     }
+
+    public boolean containsKurs(Lehrer lehrer, Long id)
+    {
+        return lehrer.containsKurs(id);
+    }
+
+    public void deleteKursFromAll(Kurs kurs)
+    {
+        for(Lehrer lehrer : repoList)
+        {
+            lehrer.loschenKurs(kurs);
+        }
+    }
 }

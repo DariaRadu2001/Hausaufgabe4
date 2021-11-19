@@ -2,7 +2,8 @@ package Controller;
 
 import java.io.IOException;
 import java.util.List;
-
+import Exception.DasElementExistiertException;
+import Exception.ListIsEmptyException;
 public interface Controller<T> {
 
     /**
@@ -10,7 +11,7 @@ public interface Controller<T> {
      * @param obj, das Objekt die ich hinlege
      * @return das Objekt
      */
-    T create(T obj) throws IOException;
+    T create(T obj) throws IOException, DasElementExistiertException;
 
     /**
      * gibt alle Elementen aus der RepoListe
@@ -23,7 +24,7 @@ public interface Controller<T> {
      * @param obj, das Objekt mit dem switch erledigt
      * @return das alte Objet mit den neuen Attributen
      */
-    T update(T obj) throws IOException;
+    T update(T obj) throws IOException, ListIsEmptyException;
 
     /**
      * aus der RepoListe ein Objekt löschen

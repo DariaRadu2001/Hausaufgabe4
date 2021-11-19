@@ -1,19 +1,21 @@
-import Modele.Kurs;
-import Modele.Lehrer;
-import Modele.Student;
+import Controller.KursController;
+import Controller.LehrerController;
+import Controller.StudentController;
+import KonsoleView.KonsoleView;
+
 import Repository.KursRepository;
 import Repository.LehrerRepository;
 import Repository.StudentRepository;
-
+import Exception.DasElementExistiertException;
+import Exception.ListIsEmptyException;
 import java.io.IOException;
-import java.util.ArrayList;
-import java.util.List;
+
 
 public class Main {
 
-    public static void main(String[] args) throws IOException, IllegalAccessException {
+    public static void main(String[] args) throws IOException, IllegalAccessException, ListIsEmptyException, DasElementExistiertException {
         /*
-         */
+
         LehrerRepository lehrerRepository = new LehrerRepository();
         lehrerRepository.readFromFile();
         System.out.println(lehrerRepository);
@@ -30,7 +32,7 @@ public class Main {
         System.out.println(lehrerRepository);
         lehrerRepository.loschenKurs(lehrer,kurs);
         System.out.println(lehrerRepository);
-
+*/
 
         /*
         StudentRepository studentRepository = new StudentRepository();
@@ -58,7 +60,6 @@ public class Main {
         System.out.println(studentRepository);
         */
 
-
         /*
         KursRepository kursRepository = new KursRepository();
         kursRepository.readFromFile();
@@ -83,5 +84,17 @@ public class Main {
         //System.out.println(kursRepository);
         //System.out.println( kursRepository.getKurseFreiePlatzen());
         */
+
+        KursRepository kursRepository = new KursRepository();
+        kursRepository.readFromFile();
+        LehrerRepository lehrerRepository = new LehrerRepository();
+        lehrerRepository.readFromFile();
+        StudentRepository studentRepository = new StudentRepository();
+        studentRepository.readFromFile();
+        KursController kursController = new KursController(kursRepository,studentRepository);
+        LehrerController lehrerController = new LehrerController(lehrerRepository,studentRepository);
+        StudentController studentController = new StudentController(studentRepository);
+        KonsoleView view = new KonsoleView(kursController,lehrerController,studentController);
+        view.start();
     }
 }

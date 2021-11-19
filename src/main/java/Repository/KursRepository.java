@@ -8,6 +8,8 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.ObjectWriter;
 
 import java.io.*;
+import Exception.DasElementExistiertException;
+import Exception.ListIsEmptyException;
 import java.util.*;
 
 public class KursRepository extends InMemoryRepository<Kurs> implements FileRepository<Kurs>{
@@ -103,12 +105,11 @@ public class KursRepository extends InMemoryRepository<Kurs> implements FileRepo
 
 
     @Override
-    public Kurs create(Kurs obj) throws IOException
-    {
+    public Kurs create(Kurs obj) throws IOException, DasElementExistiertException {
         for(Kurs kurs : repoList)
         {
             if(kurs.getID() == obj.getID())
-                throw new IllegalArgumentException("Das Object ist in der Liste.");
+                throw new DasElementExistiertException("Das Kurs ist in der Liste.");
         }
 
         this.repoList.add(obj);
@@ -118,10 +119,9 @@ public class KursRepository extends InMemoryRepository<Kurs> implements FileRepo
 
 
     @Override
-    public Kurs update(Kurs obj) throws IOException
-    {
+    public Kurs update(Kurs obj) throws IOException, ListIsEmptyException {
         if(repoList.isEmpty())
-            throw  new IndexOutOfBoundsException("Die Liste ist leer");
+            throw  new ListIsEmptyException("Die Liste ist leer");
 
         Kurs kursToUpdate = this.repoList.stream()
                 .filter(kurs -> Objects.equals(kurs.getID(), obj.getID()))
@@ -212,8 +212,7 @@ public class KursRepository extends InMemoryRepository<Kurs> implements FileRepo
         return mapFreieKurse;
     }
 
-    public int andernECTS(int ECTS,Long idKurs) throws IOException
-    {
+    public int andernECTS(int ECTS,Long idKurs) throws IOException, ListIsEmptyException {
         for(Kurs kurs : repoList)
         {
             if (kurs.getID() == idKurs)
@@ -256,7 +255,7 @@ public class KursRepository extends InMemoryRepository<Kurs> implements FileRepo
         return valid;
     }
 
-    public void addStudent(Student student, Long idKurs) throws IOException {
+    public void addStudent(Student student, Long idKurs) throws IOException, ListIsEmptyException {
         if(validationFreiePlatzen(idKurs) && containsKursStudent(idKurs, student.getStudentID()))
         {
             for(Kurs kurs : repoList)

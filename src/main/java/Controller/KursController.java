@@ -4,9 +4,11 @@ import Modele.Kurs;
 import Modele.Student;
 import Repository.KursRepository;
 import Repository.StudentRepository;
-
+import Exception.DasElementExistiertException;
+import Exception.ListIsEmptyException;
 import java.io.IOException;
 import java.util.List;
+
 
 public class KursController implements Controller<Kurs> {
 
@@ -35,7 +37,7 @@ public class KursController implements Controller<Kurs> {
     }
 
     @Override
-    public Kurs create(Kurs obj) throws IOException {
+    public Kurs create(Kurs obj) throws IOException, DasElementExistiertException {
         return kursRepo.create(obj);
     }
 
@@ -45,7 +47,7 @@ public class KursController implements Controller<Kurs> {
     }
 
     @Override
-    public Kurs update(Kurs obj) throws IOException {
+    public Kurs update(Kurs obj) throws IOException, ListIsEmptyException {
         return kursRepo.update(obj);
     }
 
@@ -98,8 +100,7 @@ public class KursController implements Controller<Kurs> {
     }
 
 
-    public boolean andernECTS(int ECTS, Long idKurs) throws IOException
-    {
+    public boolean andernECTS(int ECTS, Long idKurs) throws IOException, ListIsEmptyException {
         int alteECTS = kursRepo.andernECTS(ECTS, idKurs);
         if(alteECTS != -1)
         {
@@ -110,7 +111,7 @@ public class KursController implements Controller<Kurs> {
     }
 
 
-    public boolean register(Student student, Kurs kurs) throws IOException {
+    public boolean register(Student student, Kurs kurs) throws IOException, ListIsEmptyException {
         if(kursRepo.validationFreiePlatzen(kurs.getID()) && studentenRepo.validationAddKurs(student, kurs))
         {
             kursRepo.addStudent(student, kurs.getID());

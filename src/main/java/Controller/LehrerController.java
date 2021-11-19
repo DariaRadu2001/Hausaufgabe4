@@ -91,4 +91,16 @@ public class LehrerController implements Controller<Lehrer>{
     {
         return lehrerRepo.containsID(id);
     }
+
+    public boolean containsKurs(Lehrer lehrer, Long id)
+    {
+        return lehrerRepo.containsKurs(lehrer, id);
+    }
+
+    public void deleteKursFromAll(Kurs kurs)
+    {
+        lehrerRepo.deleteKursFromAll(kurs);
+    }
+
+
 }

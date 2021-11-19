@@ -62,4 +62,9 @@ public class Lehrer extends Person{
         this.kurse.remove(kurs.getID());
     }
 
+    public boolean containsKurs(Long id)
+    {
+        return this.kurse.contains(id);
+    }
+
 }
