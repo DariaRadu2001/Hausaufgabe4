@@ -25,6 +25,11 @@ public class KursRepository extends InMemoryRepository<Kurs> implements FileRepo
                 '}';
     }
 
+    /**
+     * liest aus dem kurs.json File die Kurse
+     * @return die Liste von Kursen
+     * @throws IOException, fur Lesen im File
+     */
     @Override
     public List<Kurs> readFromFile() throws IOException {
 
@@ -34,7 +39,7 @@ public class KursRepository extends InMemoryRepository<Kurs> implements FileRepo
 
         for (JsonNode pm : parser) {
 
-            Long ID = pm.path("id").asLong();
+            long ID = pm.path("id").asLong();
 
             String name = pm.path("name").asText();
 
@@ -58,6 +63,10 @@ public class KursRepository extends InMemoryRepository<Kurs> implements FileRepo
 
     }
 
+    /**
+     * schreibt neue Kurse in kurse.json
+     * @throws IOException, fur Schreiben im File
+     */
     @Override
     public void writeToFile() throws IOException {
 
@@ -69,6 +78,12 @@ public class KursRepository extends InMemoryRepository<Kurs> implements FileRepo
 
     }
 
+    /**
+     * sucht in dem kurs.json File einen Kurs nach seinem Id
+     * @param idKurs, des Kurses
+     * @return der Kurs, wenn man ihn findet, anderenfalls null
+     * @throws IOException, fur Lesen im File
+     */
     @Override
     public Kurs findOne(Long idKurs) throws IOException
     {
@@ -80,7 +95,7 @@ public class KursRepository extends InMemoryRepository<Kurs> implements FileRepo
         {
 
             Long ID = pm.path("id").asLong();
-            if(idKurs == ID)
+            if(Objects.equals(idKurs, ID))
             {
                 String name = pm.path("name").asText();
 
@@ -103,7 +118,13 @@ public class KursRepository extends InMemoryRepository<Kurs> implements FileRepo
         return null;
     }
 
-
+    /**
+     * add eines Kurses in der RepoListe, wenn er nicht dort ist
+     * @param obj, der Kurs der man hinlegen will
+     * @return den hingelegten Kurs
+     * @throws IOException, fur Schreiben im File
+     * @throws DasElementExistiertException, das Element ist in der Liste
+     */
     @Override
     public Kurs create(Kurs obj) throws IOException, DasElementExistiertException {
         for(Kurs kurs : repoList)
@@ -118,6 +139,13 @@ public class KursRepository extends InMemoryRepository<Kurs> implements FileRepo
     }
 
 
+    /**
+     * ändert die Attribute eines Kurses, wenn die Liste leer ist oder der Kurs nicht in der Liste ist → Exception
+     * @param obj, das Objekt mit dem switch erledigt
+     * @return der neue Kurs
+     * @throws IOException, fur Schreiben im File
+     * @throws ListIsEmptyException, die Liste ist leer
+     */
     @Override
     public Kurs update(Kurs obj) throws IOException, ListIsEmptyException {
         if(repoList.isEmpty())
@@ -138,8 +166,14 @@ public class KursRepository extends InMemoryRepository<Kurs> implements FileRepo
         return kursToUpdate;
     }
 
+    /**
+     * löscht einen Kurs nach seinem Id
+     * @param idKurs, des Kurse
+     * @return true, wenn den Kurs löscht, anderenfalls false
+     * @throws IOException, fur Schreiben im File
+     */
     @Override
-    public boolean delete(Long idKurs) throws IllegalAccessException, IOException
+    public boolean delete(Long idKurs) throws IOException
     {
         if(repoList.isEmpty())
             throw new IndexOutOfBoundsException("Die Liste ist leer");
@@ -160,7 +194,7 @@ public class KursRepository extends InMemoryRepository<Kurs> implements FileRepo
     }
 
     /**
-     * filtert die Liste nach dem Anzahl von ECTS(die Kurse die >5 ECTS haben)
+     * filtert die Liste nach die Anzahl von ECTS(die Kurse die >5 ECTS haben)
      * @return die gefilterte Liste
      */
     public List<Kurs> filterList()
@@ -174,7 +208,7 @@ public class KursRepository extends InMemoryRepository<Kurs> implements FileRepo
      */
     public void sortList()
     {
-        Collections.sort(repoList,Kurs::compareTo);
+        repoList.sort(Kurs::compareTo);
     }
 
 
@@ -196,8 +230,8 @@ public class KursRepository extends InMemoryRepository<Kurs> implements FileRepo
     }
 
     /**
-     * Ich untersuche, welche Kurse noch freien Platzen haben
-     * @return ein Map der als Key den Kurs und als Value die Anzahl den freien Platze hat
+     * untersucht, welche Kurse noch freien Platzen haben
+     * @return ein Map der als Key den Kurs und als Value die Anzahl dem freien Platze hat
      */
     public Map<Long, Integer> kurseFreiePlatzenUndAnzahl()
     {
@@ -212,6 +246,14 @@ public class KursRepository extends InMemoryRepository<Kurs> implements FileRepo
         return mapFreieKurse;
     }
 
+    /**
+     * ändert die Anzahl der ECTS eines Kurses
+     * @param ECTS, neue ECTS
+     * @param idKurs, des Kurses
+     * @return die alte ECTS, wenn der Kurs existiert, anderenfalls -1
+     * @throws IOException, fur Schreiben im File
+     * @throws ListIsEmptyException, die Liste ist leer
+     */
     public int andernECTS(int ECTS,Long idKurs) throws IOException, ListIsEmptyException {
         for(Kurs kurs : repoList)
         {
@@ -227,6 +269,11 @@ public class KursRepository extends InMemoryRepository<Kurs> implements FileRepo
         return -1;
     }
 
+    /**
+     * untersucht, ob ein Kurs freie Platzen hat
+     * @param idKurs, des Kurses
+     * @return true, wenn der Kurs freie Platzen hat, anderenfalls false
+     */
     public boolean validationFreiePlatzen(Long idKurs)
     {
         boolean valid = false;
@@ -241,6 +288,13 @@ public class KursRepository extends InMemoryRepository<Kurs> implements FileRepo
         return valid;
     }
 
+    /**
+     * untersucht, ob ein Student bei einem Kurs teilnimmt
+     * @param idKurs, des Kurses
+     * @param idStudent, des Students
+     * @return true, wenn der Student in der Liste von angemeldeten Studenten des Kurses sich befindet,
+     * anderenfalls false
+     */
     public boolean containsKursStudent(Long idKurs, Long idStudent)
     {
         boolean valid = false;
@@ -255,6 +309,13 @@ public class KursRepository extends InMemoryRepository<Kurs> implements FileRepo
         return valid;
     }
 
+    /**
+     * man legt einen neuen Student in der Liste von Studenten eines Kurses
+     * @param student, den man legt
+     * @param idKurs, des Kurses
+     * @throws IOException, fur Schreiben im File
+     * @throws ListIsEmptyException, die Liste ist leer
+     */
     public void addStudent(Student student, Long idKurs) throws IOException, ListIsEmptyException {
         if(validationFreiePlatzen(idKurs) && containsKursStudent(idKurs, student.getStudentID()))
         {
@@ -271,6 +332,11 @@ public class KursRepository extends InMemoryRepository<Kurs> implements FileRepo
         }
     }
 
+    /**
+     * untersucht, ob ein Kurs existiert
+     * @param id, des Kurses
+     * @return true, wenn der Kurs in der RepoListe ist, anderenfalls false
+     */
     public boolean containsID(Long id)
     {
         for(Kurs kurs : repoList)

@@ -119,7 +119,7 @@ public class Kurs implements Comparable<Kurs>{
     }
 
     /**
-     * ich berechne der Anzahl den freien Platzen fur dem Kurs
+     * berechnet der Anzahl dem freien Platzen fur dem Kurs
      * @return Anzahl von freien Platzen
      */
     public int getAnzahlFreienPlatze()
@@ -129,21 +129,9 @@ public class Kurs implements Comparable<Kurs>{
 
 
     /**
-     * ich will nur den Namen des Kurses anzeigen
-     * @return String mit dem Namen des Kurses
-     */
-    public String toString2() {
-        return "Kurs{" +
-                "name='" + name + "'"+
-                '}';
-    }
-
-    /**
      * vergleicht 2 Kurse nach der Anzahl das freie Platzen
      * @param o (Kurs2)
-     * @return 1, wenn Kurs1 mehrere Platzen hat
-     * @return -1, wenn Kurs1 weniger Platzen hat
-     * @return 0, wenn Kurs1 = Kurs2 beim Anzahl freien Platzen
+     * @return 1, wenn Kurs1 mehreren Platzen hat, -1, wenn Kurs1 weniger Platzen hat, 0, wenn Kurs1 = Kurs2 beim Anzahl freien Platzen
      */
     @Override
     public int compareTo(Kurs o) {

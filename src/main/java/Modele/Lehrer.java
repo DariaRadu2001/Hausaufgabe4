@@ -46,7 +46,7 @@ public class Lehrer extends Person{
 
     /**
      * ein Kurs zu der Liste der unterrichteten Kurse eines Lehrers hinzufügen
-     * @param kurs
+     * @param kurs, der hinfügen will
      */
     public void addKurs(Kurs kurs)
     {
@@ -55,13 +55,18 @@ public class Lehrer extends Person{
 
     /**
      * ein Kurs von der Liste der unterrichteten Kurse eines Lehrers löschen
-     * @param kurs
+     * @param kurs, den löschen will
      */
     public void loschenKurs(Kurs kurs)
     {
         this.kurse.remove(kurs.getID());
     }
 
+    /**
+     * schaut, wenn der Lehrer einen Kurs nach seinem Id halt
+     * @param id, des Kurses
+     * @return true, wenn das Id in der Kurse Liste ist, anderenfalls nein
+     */
     public boolean containsKurs(Long id)
     {
         return this.kurse.contains(id);

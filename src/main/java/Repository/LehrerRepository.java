@@ -1,7 +1,6 @@
 package Repository;
 import Modele.Lehrer;
 import Modele.Kurs;
-import Modele.Student;
 import com.fasterxml.jackson.core.util.DefaultPrettyPrinter;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
@@ -26,10 +25,10 @@ public class LehrerRepository extends InMemoryRepository<Lehrer> implements File
     }
 
     /**
-     * ich andere die Attribute eines Lehrers, wenn die Liste leer ist oder der Lehrer nicht in der Liste ist → Exception
-     * @param obj, der Lehrer, den ich andern will
+     * ändert die Attribute eines Lehrers, wenn die Liste leer ist oder der Lehrer nicht in der Liste ist → Exception
+     * @param obj, der Lehrer, den man andern will
      * @return der neue Lehrer
-     * @throws IndexOutOfBoundsException
+     * @throws IndexOutOfBoundsException, fur Schreiben im File
      */
     @Override
     public Lehrer update(Lehrer obj) throws IOException {
@@ -52,6 +51,11 @@ public class LehrerRepository extends InMemoryRepository<Lehrer> implements File
     }
 
 
+    /**
+     * liest aus dem lehrer.json File die Professoren
+     * @return die Liste von Professoren
+     * @throws IOException, fur Lesen vomm File
+     */
     @Override
     public List<Lehrer> readFromFile() throws IOException {
         Reader reader = new BufferedReader(new FileReader("lehrer.json"));
@@ -80,7 +84,10 @@ public class LehrerRepository extends InMemoryRepository<Lehrer> implements File
         return repoList;
     }
 
-
+    /**
+     * schreibt neue Kurse in lehrer.json
+     * @throws IOException, fur Schreiben im File
+     */
     @Override
     public void writeToFile() throws IOException {
 
@@ -92,7 +99,12 @@ public class LehrerRepository extends InMemoryRepository<Lehrer> implements File
 
     }
 
-
+    /**
+     * sucht in dem lehrer.json File einen Professor nach seinem Id
+     * @param id, des Lehrers
+     * @return der Lehrer, wenn man ihn findet, anderenfalls null
+     * @throws IOException, fur Lesen vom File
+     */
     @Override
     public Lehrer findOne(Long id) throws IOException {
         Reader reader = new BufferedReader(new FileReader("lehrer.json"));
@@ -126,9 +138,14 @@ public class LehrerRepository extends InMemoryRepository<Lehrer> implements File
         return null;
     }
 
-
+    /**
+     * löscht einen Lehrer nach seinem Id
+     * @param idLehrer, des Lehrers
+     * @return true, wenn den Lehrer löscht, anderenfalls false
+     * @throws IOException, fur Schreiben im File
+     */
     @Override
-    public boolean delete(Long idLehrer) throws IllegalAccessException, IOException {
+    public boolean delete(Long idLehrer) throws IOException {
 
         if(repoList.isEmpty())
             throw new IndexOutOfBoundsException("Die Liste ist leer");
@@ -147,7 +164,12 @@ public class LehrerRepository extends InMemoryRepository<Lehrer> implements File
         return false;
     }
 
-
+    /**
+     * add einen Lehrer in der RepoListe, wenn er nicht dort ist
+     * @param obj, der Lehrer der man hinlegen will
+     * @return den hingelegten Lehrer
+     * @throws IOException, fur Schreiben im File
+     */
     @Override
     public Lehrer create(Lehrer obj) throws IOException {
 
@@ -162,7 +184,13 @@ public class LehrerRepository extends InMemoryRepository<Lehrer> implements File
         return obj;
     }
 
-
+    /**
+     * löscht ein Kurs von einem Professor
+     * @param lehrer, von dem man den Kurs löscht
+     * @param kurs, den man löscht
+     * @return true, wenn man den Kurs löscht, anderenfalls false
+     * @throws IOException, fur Schreiben im File
+     */
     public boolean loschenKurs(Lehrer lehrer,Kurs kurs) throws IOException {
         if(!lehrer.getKurse().contains(kurs.getID()))
             return false;
@@ -172,6 +200,11 @@ public class LehrerRepository extends InMemoryRepository<Lehrer> implements File
         return true;
     }
 
+    /**
+     * untersucht, ob ein Lehrer existiert
+     * @param id, des Lehrers
+     * @return true, wenn der Lehrer in der RepoListe ist, anderenfalls false
+     */
     public boolean containsID(Long id)
     {
         for(Lehrer lehrer : repoList)
@@ -182,11 +215,21 @@ public class LehrerRepository extends InMemoryRepository<Lehrer> implements File
         return false;
     }
 
+    /**
+     *  untersucht, ob ein Lehrer einen Kurs unterrichtet
+     * @param lehrer, der Lhrer
+     * @param id, des Kurses
+     * @return true, wenn der Lehrer den Kurs unterrichtet, anderenfalls false
+     */
     public boolean containsKurs(Lehrer lehrer, Long id)
     {
         return lehrer.containsKurs(id);
     }
 
+    /**
+     * löscht einen Kurs von allen Professoren aus dem RepoList
+     * @param kurs, den man löscht
+     */
     public void deleteKursFromAll(Kurs kurs)
     {
         for(Lehrer lehrer : repoList)

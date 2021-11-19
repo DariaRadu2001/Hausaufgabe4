@@ -65,8 +65,8 @@ public class Student extends Person implements Comparable<Student>{
     }
 
     /**
-     * ich lösche einen Kurs aus der Liste eines Students und subtrahiere die Anzahl des Kurses ECTS von dem Anzahl derKredite des Students
-     * @param kurs
+     * löscht einen Kurs aus der Liste eines Students und subtrahiere die Anzahl des Kurses ECTS von dem Anzahl derKredite des Students
+     * @param kurs, den man löscht
      */
     public void loschenKurs(Kurs kurs)
     {
@@ -75,7 +75,7 @@ public class Student extends Person implements Comparable<Student>{
     }
 
     /**
-     * ich berechne wv. Kredite ein Student noch braucht bis er insgesamt 30 hat
+     * berechnet wv. Kredite ein Student noch braucht bis er insgesamt 30 hat
      * @return Anzahl notwendigen Krediten
      */
     public int getNotwendigeKredits()
@@ -84,8 +84,8 @@ public class Student extends Person implements Comparable<Student>{
     }
 
     /**
-     * Wenn ein Student sich fur einen Kurs anmeldet, dann fuge ich den Kurs in seiner Liste und inkrementiere seine ECTS mit der Anzahl des Kurses ECTS
-     * @param kurs
+     * Wenn ein Student sich fur einen Kurs anmeldet, dann fugt man den Kurs in seiner Liste und inkrementiere seine ECTS mit der Anzahl des Kurses ECTS
+     * @param kurs, bei dem sich der Student anmelden will
      */
     public void enrolled(Kurs kurs)
     {
@@ -94,25 +94,22 @@ public class Student extends Person implements Comparable<Student>{
     }
 
     /**
-     * Methode, um nur der Name der Kurse, in denen der Student angemeldet ist
+     * gibt beim wv. Kursen der Student angemeldet ist
+     * @return Anzahl der Kurse des Studenten
      */
-    public void showKurse()
-    {
-        System.out.println(this.getStudentID() + "ist angeschrieben an :");
-        for(Long kurs : angeschriebeneKurse)
-        {
-            System.out.println(kurs);
-        }
-    }
-
     public int getAnzahlKurse()
     {
         return this.angeschriebeneKurse.size();
     }
 
+    /**
+     * vergleicht der Anzahl der Kurse von 2 Studenten
+     * @param student2, der andere Student
+     * @return welcher eine Kleinere Anzahl von Kurse hat
+     */
     @Override
-    public int compareTo(Student o) {
-        return Integer.compare(this.getAnzahlKurse(), o.getAnzahlKurse());
+    public int compareTo(Student student2) {
+        return Integer.compare(this.getAnzahlKurse(), student2.getAnzahlKurse());
 
     }
 

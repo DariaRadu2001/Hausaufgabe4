@@ -9,7 +9,6 @@ import com.fasterxml.jackson.databind.ObjectWriter;
 
 import java.io.*;
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.List;
 import java.util.Objects;
 
@@ -34,7 +33,7 @@ public class StudentRepository extends InMemoryRepository<Student> implements Fi
 
         for (JsonNode pm : parser) {
 
-            Long ID = pm.path("studentID").asLong();
+            long ID = pm.path("studentID").asLong();
 
             String vorName = pm.path("vorname").asText();
 
@@ -76,7 +75,7 @@ public class StudentRepository extends InMemoryRepository<Student> implements Fi
         for (JsonNode pm : parser)
         {
 
-            Long ID = pm.path("studentID").asLong();
+            long ID = pm.path("studentID").asLong();
             if(Objects.equals(id, ID))
             {
 
@@ -155,7 +154,7 @@ public class StudentRepository extends InMemoryRepository<Student> implements Fi
      */
     public void sortList()
     {
-        Collections.sort(repoList, Student::compareTo);
+        repoList.sort(Student::compareTo);
     }
 
     /**
@@ -191,6 +190,11 @@ public class StudentRepository extends InMemoryRepository<Student> implements Fi
         return studentenAngemeldet;
     }
 
+    /**
+     * löscht einen Kurs von allen Studenten, die ihn belegt
+     * @param kurs, den man entfernt
+     * @throws IOException, fur Schreiben im File
+     */
     public void loschenKurs(Kurs kurs) throws IOException {
         for(Student student : repoList)
         {
@@ -203,6 +207,13 @@ public class StudentRepository extends InMemoryRepository<Student> implements Fi
     }
 
 
+    /**
+     * ändert die Anzahl der ECTS von allen Studenten, die bei einem Kurs teilnehmen, wessen ECTS geändert wurden
+     * @param ECTS, neue ECTS des Kurses
+     * @param idKurs, des Kurses
+     * @param oldECTS, alte ECTS des Kurses
+     * @throws IOException, fur Schreiben im File beim update Methode
+     */
     public void andernECTS(int ECTS, Long idKurs, int oldECTS) throws IOException {
         for (Student student : repoList) {
             if (student.getAngeschriebeneKurse().contains(idKurs)) {
@@ -213,18 +224,27 @@ public class StudentRepository extends InMemoryRepository<Student> implements Fi
         }
     }
 
+    /**
+     * berechnet ob ein Student zu einem Kurs teilnehmen kann
+     * @param student, der Student
+     * @param kurs, der Kurs
+     * @return true ,wenn er teilnehmen kann, anderenfalls false
+     */
     public boolean validationAddKurs(Student student, Kurs kurs)
     {
         if(!repoList.contains(student))
             return false;
 
-        if(student.getNotwendigeKredits() >= kurs.getEcts())
-            return true;
-        else
-            return false;
+        return student.getNotwendigeKredits() >= kurs.getEcts();
 
     }
 
+    /**
+     * ein Student nimmt bei einem Kurs teil → der Kurs wird in seiner Liste von Kurs hingelegt
+     * @param student, der Student
+     * @param kurs, der Kurs
+     * @throws IOException, fur Schreiben im File
+     */
     public void addKurs(Student student, Kurs kurs) throws IOException {
         if(validationAddKurs(student,kurs))
         {
@@ -234,6 +254,11 @@ public class StudentRepository extends InMemoryRepository<Student> implements Fi
         }
     }
 
+    /**
+     * untersucht, ob ein Student existiert
+     * @param id, des Student
+     * @return true, wenn der Student in der RepoListe ist, anderenfalls false
+     */
     public boolean containsID(Long id)
     {
         for(Student student : repoList)

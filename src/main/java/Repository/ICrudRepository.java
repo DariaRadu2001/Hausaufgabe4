@@ -30,7 +30,6 @@ public interface ICrudRepository<T> {
     /**
      * aus der RepoListe ein Objekt löschen
      * @param objID, das Objekt, das ich löschen will
-     * @throws IllegalAccessException
      */
     boolean delete(Long objID) throws IllegalAccessException, IOException;
 

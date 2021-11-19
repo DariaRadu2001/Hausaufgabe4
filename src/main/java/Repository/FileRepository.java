@@ -1,7 +1,5 @@
 package Repository;
 
-import Modele.Kurs;
-
 import java.io.IOException;
 import java.util.List;
 
@@ -19,7 +17,7 @@ public interface FileRepository<T> extends ICrudRepository<T>{
 
     /**
      * sucht in dem File, ob ein Objekt existiert mit Hilfe eines IDs
-     * @param id
+     * @param id, des Elementes das man in dem RepoListe sucht
      * @return das Objekt,wenn man es findet
      * @throws IOException das Objekt existiert nicht
      */
