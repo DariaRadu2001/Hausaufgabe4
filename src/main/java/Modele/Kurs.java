@@ -7,36 +7,36 @@ public class Kurs implements Comparable<Kurs>{
 
     private long ID;
     private String name;
-    private int lehrer;
+    private long lehrer;
     private int maximaleAnzahlStudenten;
     private List<Long> listeStudenten;
-    private int ECTS;
+    private int ects;
 
-    public Kurs(long ID, String name, int lehrer, int maximaleAnzahlStudenten, List<Long> listeStudenten, int ECTS) {
+    public Kurs(long ID, String name, long lehrer, int maximaleAnzahlStudenten, List<Long> listeStudenten, int ECTS) {
         this.ID = ID;
         this.name = name;
         this.lehrer = lehrer;
         this.maximaleAnzahlStudenten = maximaleAnzahlStudenten;
         this.listeStudenten = listeStudenten;
-        this.ECTS = ECTS;
+        this.ects = ECTS;
     }
 
-    public Kurs(long ID, String name, int lehrer, int maximaleAnzahlStudenten, int ECTS) {
+    public Kurs(long ID, String name, long lehrer, int maximaleAnzahlStudenten, int ECTS) {
         this.ID = ID;
         this.name = name;
         this.lehrer = lehrer;
         this.maximaleAnzahlStudenten = maximaleAnzahlStudenten;
         this.listeStudenten = new ArrayList<>();
-        this.ECTS = ECTS;
+        this.ects = ECTS;
     }
 
     public Kurs(long ID,int ECTS) {
         this.ID = ID;
         this.name = "";
-        this.lehrer = 0;
+        this.lehrer = 0L;
         this.maximaleAnzahlStudenten = 0;
         this.listeStudenten = new ArrayList<>();
-        this.ECTS = ECTS;
+        this.ects = ECTS;
     }
 
     public long getID() {
@@ -55,11 +55,11 @@ public class Kurs implements Comparable<Kurs>{
         this.name = name;
     }
 
-    public int getLehrer() {
+    public long getLehrer() {
         return lehrer;
     }
 
-    public void setLehrer(int lehrer) {
+    public void setLehrer(long lehrer) {
         this.lehrer = lehrer;
     }
 
@@ -79,12 +79,12 @@ public class Kurs implements Comparable<Kurs>{
         this.listeStudenten = listeStudenten;
     }
 
-    public int getECTS() {
-        return ECTS;
+    public int getEcts() {
+        return ects;
     }
 
-    public void setECTS(int ECTS) {
-        this.ECTS = ECTS;
+    public void setEcts(int ects) {
+        this.ects = ects;
     }
 
 
@@ -96,7 +96,7 @@ public class Kurs implements Comparable<Kurs>{
                 ", lehrer=" + lehrer +
                 ", maximaleAnzahlStudenten=" + maximaleAnzahlStudenten +
                 ", listeStudenten=" + listeStudenten +
-                ", ECTS=" + ECTS +
+                ", ects=" + ects +
                 '}';
     }
 

@@ -18,6 +18,22 @@ public class KursController implements Controller<Kurs> {
         this.studentenRepo = studentenRepo;
     }
 
+    public KursRepository getKursRepo() {
+        return kursRepo;
+    }
+
+    public void setKursRepo(KursRepository kursRepo) {
+        this.kursRepo = kursRepo;
+    }
+
+    public StudentRepository getStudentenRepo() {
+        return studentenRepo;
+    }
+
+    public void setStudentenRepo(StudentRepository studentenRepo) {
+        this.studentenRepo = studentenRepo;
+    }
+
     @Override
     public Kurs create(Kurs obj) throws IOException {
         return kursRepo.create(obj);
@@ -102,5 +118,10 @@ public class KursController implements Controller<Kurs> {
             return true;
         }
         return false;
+    }
+
+    public boolean containsID(long id)
+    {
+        return kursRepo.containsID(id);
     }
 }

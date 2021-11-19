@@ -171,4 +171,14 @@ public class LehrerRepository extends InMemoryRepository<Lehrer> implements File
         writeToFile();
         return true;
     }
+
+    public boolean containsID(Long id)
+    {
+        for(Lehrer lehrer : repoList)
+        {
+            if(lehrer.getLehrerID() == id)
+                return true;
+        }
+        return false;
+    }
 }

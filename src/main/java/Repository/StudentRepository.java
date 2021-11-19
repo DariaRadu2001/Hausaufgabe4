@@ -218,7 +218,7 @@ public class StudentRepository extends InMemoryRepository<Student> implements Fi
         if(!repoList.contains(student))
             return false;
 
-        if(student.getNotwendigeKredits() >= kurs.getECTS())
+        if(student.getNotwendigeKredits() >= kurs.getEcts())
             return true;
         else
             return false;
@@ -234,5 +234,13 @@ public class StudentRepository extends InMemoryRepository<Student> implements Fi
         }
     }
 
-
+    public boolean containsID(Long id)
+    {
+        for(Student student : repoList)
+        {
+            if(student.getStudentID() == id)
+                return true;
+        }
+        return false;
+    }
 }

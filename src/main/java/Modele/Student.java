@@ -71,7 +71,7 @@ public class Student extends Person implements Comparable<Student>{
     public void loschenKurs(Kurs kurs)
     {
         this.angeschriebeneKurse.remove(kurs.getID());
-        this.totalKredits -= kurs.getECTS();
+        this.totalKredits -= kurs.getEcts();
     }
 
     /**
@@ -90,7 +90,7 @@ public class Student extends Person implements Comparable<Student>{
     public void enrolled(Kurs kurs)
     {
         this.angeschriebeneKurse.add(kurs.getID());
-        this.totalKredits += kurs.getECTS();
+        this.totalKredits += kurs.getEcts();
     }
 
     /**

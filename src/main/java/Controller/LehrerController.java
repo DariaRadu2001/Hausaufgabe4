@@ -13,6 +13,22 @@ public class LehrerController implements Controller<Lehrer>{
     private LehrerRepository lehrerRepo;
     private StudentRepository studentenRepo;
 
+    public LehrerRepository getLehrerRepo() {
+        return lehrerRepo;
+    }
+
+    public void setLehrerRepo(LehrerRepository lehrerRepo) {
+        this.lehrerRepo = lehrerRepo;
+    }
+
+    public StudentRepository getStudentenRepo() {
+        return studentenRepo;
+    }
+
+    public void setStudentenRepo(StudentRepository studentenRepo) {
+        this.studentenRepo = studentenRepo;
+    }
+
     public LehrerController(LehrerRepository lehrerRepo, StudentRepository studentenRepo) {
         this.lehrerRepo = lehrerRepo;
         this.studentenRepo = studentenRepo;
@@ -69,5 +85,10 @@ public class LehrerController implements Controller<Lehrer>{
             return true;
         }
         return false;
+    }
+
+    public boolean containsID(long id)
+    {
+        return lehrerRepo.containsID(id);
     }
 }

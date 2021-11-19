@@ -14,6 +14,13 @@ public class StudentController implements Controller<Student>{
         this.studentenRepo = studentenRepo;
     }
 
+    public StudentRepository getStudentenRepo() {
+        return studentenRepo;
+    }
+
+    public void setStudentenRepo(StudentRepository studentenRepo) {
+        this.studentenRepo = studentenRepo;
+    }
 
     @Override
     public Student create(Student obj) throws IOException {
@@ -74,4 +81,8 @@ public class StudentController implements Controller<Student>{
         System.out.println(studentenRepo.studentenAngemeldetBestimmtenKurs(kursId));
     }
 
+    public boolean containsID(long id)
+    {
+        return studentenRepo.containsID(id);
+    }
 }

@@ -131,7 +131,7 @@ public class KursRepository extends InMemoryRepository<Kurs> implements FileRepo
         kursToUpdate.setName(obj.getName());
         kursToUpdate.setLehrer(obj.getLehrer());
         kursToUpdate.setMaximaleAnzahlStudenten(obj.getMaximaleAnzahlStudenten());
-        kursToUpdate.setECTS(obj.getECTS());
+        kursToUpdate.setEcts(obj.getEcts());
         kursToUpdate.setListeStudenten(obj.getListeStudenten());
 
         writeToFile();
@@ -166,7 +166,7 @@ public class KursRepository extends InMemoryRepository<Kurs> implements FileRepo
     public List<Kurs> filterList()
     {
         return repoList.stream()
-                .filter(kurs->kurs.getECTS() > 5).toList();
+                .filter(kurs->kurs.getEcts() > 5).toList();
     }
 
     /**
@@ -218,8 +218,8 @@ public class KursRepository extends InMemoryRepository<Kurs> implements FileRepo
         {
             if (kurs.getID() == idKurs)
             {
-                int alteECTS = kurs.getECTS();
-                kurs.setECTS(ECTS);
+                int alteECTS = kurs.getEcts();
+                kurs.setEcts(ECTS);
                 this.update(kurs);
                 writeToFile();
                 return alteECTS;
@@ -270,5 +270,15 @@ public class KursRepository extends InMemoryRepository<Kurs> implements FileRepo
             }
 
         }
+    }
+
+    public boolean containsID(Long id)
+    {
+        for(Kurs kurs : repoList)
+        {
+            if(kurs.getID() == id)
+                return true;
+        }
+        return false;
     }
 }
