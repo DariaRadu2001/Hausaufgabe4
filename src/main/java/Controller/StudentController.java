@@ -91,8 +91,8 @@ public class StudentController implements Controller<Student>{
      * @throws IOException, fur Lesen aus dem File
      */
     @Override
-    public Student findOne(Long id) {
-        return findOne(id);
+    public Student findOne(Long id) throws IOException {
+        return studentenRepo.findOne(id);
     }
 
 
@@ -132,5 +132,10 @@ public class StudentController implements Controller<Student>{
     public boolean containsID(long id)
     {
         return studentenRepo.containsID(id);
+    }
+
+    public boolean containsKurs(Student student, long idKurs)
+    {
+        return studentenRepo.containsKurs(idKurs, student);
     }
 }

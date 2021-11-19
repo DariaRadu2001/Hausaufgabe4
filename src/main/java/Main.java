@@ -13,7 +13,7 @@ import java.io.IOException;
 
 public class Main {
 
-    public static void main(String[] args) throws IOException, IllegalAccessException, ListIsEmptyException, DasElementExistiertException {
+    public static void main(String[] args) throws IOException, IllegalAccessException, ListIsEmptyException, DasElementExistiertException, InterruptedException {
         /*
 
         LehrerRepository lehrerRepository = new LehrerRepository();
@@ -91,8 +91,8 @@ public class Main {
         lehrerRepository.readFromFile();
         StudentRepository studentRepository = new StudentRepository();
         studentRepository.readFromFile();
-        KursController kursController = new KursController(kursRepository,studentRepository);
-        LehrerController lehrerController = new LehrerController(lehrerRepository,studentRepository);
+        KursController kursController = new KursController(kursRepository,studentRepository,lehrerRepository);
+        LehrerController lehrerController = new LehrerController(lehrerRepository,studentRepository,kursRepository);
         StudentController studentController = new StudentController(studentRepository);
         KonsoleView view = new KonsoleView(kursController,lehrerController,studentController);
         view.start();

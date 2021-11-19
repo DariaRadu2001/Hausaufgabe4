@@ -51,152 +51,122 @@ public class KonsoleView {
     public void getMenu()
     {
         System.out.println("""
-                1.Filter Kurse\s
-                2.Sort Kurse\s
-                3.Filter Studenten\s
-                4.Sort Studenten\s
-                5.Register\s
-                6.Kurse mit freien Platzen\s
-                7.Studenten angemeldet bei einem Kurs\s
-                8.Get Kurse\s
-                9.Loschen Kurs\s
-                10.Andern ects\s
-                11.Add Kurs\s
-                12.Add Lehrer\s
-                13.Add Student\s
-                14.Tschuss\s
+                1.Filter/Sort\s
+                2.Add\s
+                3.Show\s
+                4.Register\s
+                5.Kurse mit freien Platzen\s
+                6.Studenten angemeldet bei einem Kurs\s
+                7.Entfernen Kurs\s
+                8.Andern ECTS\s
+                9.Tschuss\s
                 """);
     }
 
-    public void start() throws IOException, DasElementExistiertException, DasElementExistiertException, ListIsEmptyException, ListIsEmptyException {
+    public void start() throws IOException, DasElementExistiertException, ListIsEmptyException, InterruptedException {
         while(true)
         {
             getMenu();
             Scanner keyboard = new Scanner( System.in );
             int key;
             do {
-                System.out.print("Wahlen sie bitte eine Option: ");
+                System.out.print("Wahlen Sie bitte eine Option: ");
                 key = keyboard.nextInt();
             }
-            while(key<1 && key >14);
+            while(key<1 && key >9);
 
-            Scanner scan= new Scanner(System.in);
             long id;
             long idKurs;
+            long idStudent;
+            long idLehrer;
+
             switch (key) {
-                case 1:
-                    System.out.println(kursController.filter());
-                    break;
+                case 1 -> {
+                    getMenuSortFilter();
+                    getFunctionSortFilter();
+                }
+                case 2 -> {
+                    getAddMenu();
+                    getFunctionAdd();
+                }
+                case 3 -> {
+                    getMenuShow();
+                    getFunctionGetAll();
+                }
+                case 4 -> {
+                    do {
+                        System.out.print("Wahlen Sie bitte einen Kurs: ");
+                        idKurs = keyboard.nextInt();
+                    }
+                    while (!kursController.containsID(idKurs));
+                    do {
+                        System.out.print("Wahlen Sie bitte einen Student: ");
+                        idStudent = keyboard.nextInt();
+                    }
+                    while (!studentController.containsID(idStudent));
 
-                case 2:
-                    kursController.sort();
-                    System.out.println(kursController.getAll());
-                    break;
-
-                case 3:
-                    System.out.println(studentController.filter());
-                    break;
-
-                case 4:
-                    System.out.println();studentController.sort();
-                    break;
-
-                case 5:
-
-                    //kursController.register();
-                    break;
-
-                case 6:
-                    kursController.getKurseFreiePlatzen();
-                    break;
-
-                case 7:
+                    Kurs kurs3 = kursController.findOne(idKurs);
+                    Student student = studentController.findOne(idStudent);
+                    kursController.register(student, kurs3);
+                }
+                case 5 -> {
+                    System.out.println("Freie Kursen:\n" + kursController.getKurseFreiePlatzen());
+                    Thread.sleep(3000);
+                }
+                case 6 -> {
                     System.out.println("ID:");
-                    id= scan.nextLong();
-                    if(kursController.containsID(id))
-                    {
+                    id = keyboard.nextLong();
+                    if (kursController.containsID(id)) {
                         studentController.getStudentenAngemeldetBestimmtenKurs(id);
-                    }
-                    else
+                    } else
                         System.out.println("Das gegebene Kurs existiert nicht.\n");
-                    break;
+                    Thread.sleep(3000);
+                }
+                case 7 -> {
+                    do {
+                        System.out.print("Wahlen Sie bitte einen Lehrer: ");
+                        idLehrer = keyboard.nextLong();
+                    }
+                    while (!lehrerController.containsID(idLehrer));
 
-                case 8:
-                    kursController.getAll();
-                    break;
+                    do {
+                        System.out.print("Wahlen Sie bitte einen Kurs: ");
+                        idKurs = keyboard.nextLong();
+                    }
+                    while (!kursController.containsID(idKurs));
 
-                case 9:
-                    System.out.println("LehrerId:");
-                    id= scan.nextLong();
-                    System.out.println("KursId:");
-                    idKurs = scan.nextLong();
-                    if(lehrerController.containsID(id))
-                    {
+                    if (lehrerController.containsID(idLehrer)) {
 
-                        Lehrer lehrer = lehrerController.findOne(id);
-                        if(lehrerController.containsKurs(lehrer, idKurs))
-                        {
-                            Kurs kurs = kursController.findOne(idKurs);
-                            lehrerController.loschenKurs(lehrer,kurs);
-                            lehrerController.deleteKursFromAll(kurs);
-                        }
-                        else
+                        Lehrer lehrer = lehrerController.findOne(idLehrer);
+                        if (lehrerController.containsKurs(lehrer, idKurs)) {
+                            Kurs kurs2 = kursController.findOne(idKurs);
+                            lehrerController.loschenKurs(lehrer, kurs2);
+                            lehrerController.deleteKursFromAll(kurs2);
+                        } else
                             System.out.println("Der Lehrer kann das Kurs nicht löschen.\n");
-                    }
-
-                    else
+                    } else
                         System.out.println("Der Lehrer existiert nicht.\n");
-                    break;
-
-                case 10:
-
+                    Thread.sleep(2000);
+                }
+                case 8 -> {
                     System.out.println("KursId:");
-                    idKurs = scan.nextLong();
+                    idKurs = keyboard.nextLong();
                     System.out.println("ECTS:");
-                    int ects = scan.nextInt();
-                    if(kursController.containsID(idKurs))
-                    {
-                        kursController.andernECTS(ects,idKurs);
-                    }
-                    break;
-
-                case 11:
-                    Kurs kurs = this.createKurs();
-                    kursController.create(kurs);
-                    break;
-
-                case 12:
-                    Lehrer lehrer = this.createLehrer();
-                    lehrerController.create(lehrer);
-                    break;
-
-                case 13:
-                    Student student = this.createStudent();
-                    studentController.create(student);
-                    break;
-
-
-                case 14:
-                {
+                    int ects = keyboard.nextInt();
+                    if (kursController.containsID(idKurs)) {
+                        kursController.andernECTS(ects, idKurs);
+                        System.out.println("Die ECTS wurden geändert.\n");
+                    } else
+                        System.out.println("Das Kurs existiert nicht.\n");
+                    Thread.sleep(2000);
+                }
+                case 9 -> {
                     System.out.println("TSCHUSS!!!");
                     System.exit(0);
                 }
             }
         }
 
-    }
-
-    public Student getStudent(Long id)
-    {
-        return studentController.findOne(id);
-    }
-
-    public Kurs getKurs(Long id) throws IOException {
-        return kursController.findOne(id);
-    }
-
-    public Lehrer getLehrer(Long id) throws IOException {
-        return lehrerController.findOne(id);
     }
 
     public Student createStudent()
@@ -206,7 +176,7 @@ public class KonsoleView {
         String vorname= scan.nextLine();
         System.out.println("Nachname:");
         String nachname= scan.nextLine();
-        Long id = -1L;
+        long id;
         do{
             System.out.println("ID:");
             id= scan.nextLong();
@@ -223,7 +193,7 @@ public class KonsoleView {
         String vorname= scan.nextLine();
         System.out.println("Nachname:");
         String nachname= scan.nextLine();
-        Long id = -1L;
+        long id;
         do{
             System.out.println("ID:");
             id= scan.nextLong();
@@ -233,32 +203,31 @@ public class KonsoleView {
 
     }
 
-
     public Kurs createKurs()
     {
         Scanner scan= new Scanner(System.in);
         System.out.println("Name:");
         String name= scan.nextLine();
 
-        long id = -1L;
+        long id;
         do{
             System.out.println("ID:");
             id= scan.nextLong();
         }while(kursController.containsID(id));
 
-        Long idLehrer = -1L;
+        long idLehrer;
         do{
             System.out.println("Lehrer:");
             idLehrer= scan.nextLong();
         }while(!lehrerController.containsID(idLehrer));
 
-        int maximaleAnzahlStudenten = -1;
+        int maximaleAnzahlStudenten;
         do{
             System.out.println("Maximale Anzahl von Studenten:");
             maximaleAnzahlStudenten= scan.nextInt();
         }while(maximaleAnzahlStudenten <= 0);
 
-        int ects = -1;
+        int ects;
         do{
             System.out.println("ECTS:");
             ects= scan.nextInt();
@@ -266,5 +235,114 @@ public class KonsoleView {
 
         return new Kurs(id, name, idLehrer, maximaleAnzahlStudenten, ects);
 
+    }
+
+    public void getMenuSortFilter()
+    {
+        System.out.println("""
+                1.Filter Kurse\s
+                2.Sortiere Kurse\s
+                3.Filter Studenten\s
+                4.Sortiere Studenten\s
+                """);
+    }
+
+    public void getFunctionSortFilter() throws InterruptedException {
+        Scanner scan= new Scanner(System.in);
+        int key;
+        do {
+            System.out.print("Wahlen Sie bitte eine Option: ");
+            key = scan.nextInt();
+        }
+        while(key<1 && key >4);
+
+        switch (key) {
+            case 1 -> {
+                System.out.println(kursController.filter());
+                Thread.sleep(3000);
+            }
+            case 2 -> {
+                kursController.sort();
+                System.out.println(kursController.getAll());
+                Thread.sleep(3000);
+            }
+            case 3 -> {
+                System.out.println(studentController.filter());
+                Thread.sleep(3000);
+            }
+            case 4 -> {
+                studentController.sort();
+                System.out.println(studentController.getAll());
+                Thread.sleep(3000);
+            }
+        }
+    }
+
+    public void getAddMenu()
+    {
+        System.out.println("""
+                1.Add Kurse\s
+                2.Add Lehrer\s
+                3.Add Studenten\s
+                """);
+    }
+
+    public void getFunctionAdd() throws IOException, DasElementExistiertException {
+        Scanner scan= new Scanner(System.in);
+        int key;
+        do {
+            System.out.print("Wahlen Sie bitte eine Option: ");
+            key = scan.nextInt();
+        }
+        while(key<1 && key >3);
+
+        switch (key) {
+            case 1 -> {
+                Kurs kurs = this.createKurs();
+                kursController.create(kurs);
+            }
+            case 2 -> {
+                Lehrer lehrer = this.createLehrer();
+                lehrerController.create(lehrer);
+            }
+            case 3 -> {
+                Student student = this.createStudent();
+                studentController.create(student);
+            }
+        }
+    }
+
+    public void getMenuShow()
+    {
+        System.out.println("""
+                1.Show Kurse\s
+                2.Show Lehrer\s
+                3.Show Studenten\s
+                """);
+    }
+
+    public void getFunctionGetAll() throws InterruptedException {
+        Scanner scan= new Scanner(System.in);
+        int key;
+        do {
+            System.out.print("Wahlen Sie bitte eine Option: ");
+            key = scan.nextInt();
+        }
+        while(key<1 && key >3);
+
+        switch (key) {
+            case 1 -> {
+                System.out.println("KURSE:\n" + kursController.getAll());
+                Thread.sleep(3000);
+            }
+            case 2 -> {
+                System.out.println("LEHRER:\n" + lehrerController.getAll());
+                Thread.sleep(3000);
+            }
+            case 3 -> {
+                System.out.println("STUDENTEN:\n" + studentController.getAll());
+                Thread.sleep(3000);
+            }
+        }
     }
 }

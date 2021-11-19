@@ -20,8 +20,7 @@ public abstract class InMemoryRepository<T> implements ICrudRepository<T> {
      * @return die Liste
      */
     public List<T> getAll() {
-        if(repoList.isEmpty())
-            throw new IndexOutOfBoundsException("Die Liste ist leer");
+
         return this.repoList;
     }
 

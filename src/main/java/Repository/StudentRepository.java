@@ -268,4 +268,10 @@ public class StudentRepository extends InMemoryRepository<Student> implements Fi
         }
         return false;
     }
+
+    public boolean containsKurs(long idKurs, Student student)
+    {
+        return student.getAngeschriebeneKurse().contains(idKurs);
+
+    }
 }

@@ -2,6 +2,7 @@ package Controller;
 
 import Modele.Kurs;
 import Modele.Lehrer;
+import Repository.KursRepository;
 import Repository.LehrerRepository;
 import Repository.StudentRepository;
 
@@ -12,6 +13,13 @@ public class LehrerController implements Controller<Lehrer>{
 
     private LehrerRepository lehrerRepo;
     private StudentRepository studentenRepo;
+    private KursRepository kursRepository;
+
+    public LehrerController(LehrerRepository lehrerRepo, StudentRepository studentenRepo, KursRepository kursRepository) {
+        this.lehrerRepo = lehrerRepo;
+        this.studentenRepo = studentenRepo;
+        this.kursRepository = kursRepository;
+    }
 
     public LehrerRepository getLehrerRepo() {
         return lehrerRepo;
@@ -29,11 +37,13 @@ public class LehrerController implements Controller<Lehrer>{
         this.studentenRepo = studentenRepo;
     }
 
-    public LehrerController(LehrerRepository lehrerRepo, StudentRepository studentenRepo) {
-        this.lehrerRepo = lehrerRepo;
-        this.studentenRepo = studentenRepo;
+    public KursRepository getKursRepository() {
+        return kursRepository;
     }
 
+    public void setKursRepository(KursRepository kursRepository) {
+        this.kursRepository = kursRepository;
+    }
 
     /**
      * legt einen Lehrer in der RepoListe, indem man die Methode aus dem Repo aufruft
@@ -120,6 +130,7 @@ public class LehrerController implements Controller<Lehrer>{
         if(lehrerRepo.loschenKurs(lehrer, kurs))
         {
             studentenRepo.loschenKurs(kurs);
+            kursRepository.delete(kurs.getID());
             return true;
         }
         return false;
@@ -150,9 +161,12 @@ public class LehrerController implements Controller<Lehrer>{
      * loscht einen gegebenen Kurs von allen Professoren, die den unterrichten
      * @param kurs, der man wegnimmt
      */
-    public void deleteKursFromAll(Kurs kurs)
-    {
+    public void deleteKursFromAll(Kurs kurs) throws IOException {
         lehrerRepo.deleteKursFromAll(kurs);
+    }
+
+    public void addKurs(long lehrer, Kurs kurs) throws IOException {
+        lehrerRepo.addKurs(lehrer, kurs);
     }
 
 

@@ -1,8 +1,10 @@
 package Controller;
 
 import Modele.Kurs;
+import Modele.Lehrer;
 import Modele.Student;
 import Repository.KursRepository;
+import Repository.LehrerRepository;
 import Repository.StudentRepository;
 import Exception.DasElementExistiertException;
 import Exception.ListIsEmptyException;
@@ -14,10 +16,12 @@ public class KursController implements Controller<Kurs> {
 
     private KursRepository kursRepo;
     private StudentRepository studentenRepo;
+    private LehrerRepository lehrerRepo;
 
-    public KursController(KursRepository kursRepo, StudentRepository studentenRepo) {
+    public KursController(KursRepository kursRepo, StudentRepository studentenRepo, LehrerRepository lehrerRepo) {
         this.kursRepo = kursRepo;
         this.studentenRepo = studentenRepo;
+        this.lehrerRepo = lehrerRepo;
     }
 
     public KursRepository getKursRepo() {
@@ -36,6 +40,14 @@ public class KursController implements Controller<Kurs> {
         this.studentenRepo = studentenRepo;
     }
 
+    public LehrerRepository getLehrerRepo() {
+        return lehrerRepo;
+    }
+
+    public void setLehrerRepo(LehrerRepository lehrerRepo) {
+        this.lehrerRepo = lehrerRepo;
+    }
+
     /**
      * legt ein Kurs in der RepoListe, indem man die Methode aus dem Repo aufruft
      * @param obj, das Objekt, das man hinlegt
@@ -45,6 +57,8 @@ public class KursController implements Controller<Kurs> {
      */
     @Override
     public Kurs create(Kurs obj) throws IOException, DasElementExistiertException {
+
+        lehrerRepo.addKurs(obj.getLehrer(), obj);
         return kursRepo.create(obj);
     }
 
@@ -132,10 +146,11 @@ public class KursController implements Controller<Kurs> {
 
     /**
      * gibt die Kurse mit freien Platzen, indem man die Methode aus dem Repo aufruft
+     * @return Liste den Kursen
      */
-    public void getKurseFreiePlatzen()
+    public List<Kurs> getKurseFreiePlatzen()
     {
-        kursRepo.getKurseFreiePlatzen();
+        return kursRepo.getKurseFreiePlatzen();
     }
 
 
@@ -178,9 +193,13 @@ public class KursController implements Controller<Kurs> {
     public boolean register(Student student, Kurs kurs) throws IOException, ListIsEmptyException {
         if(kursRepo.validationFreiePlatzen(kurs.getID()) && studentenRepo.validationAddKurs(student, kurs))
         {
-            kursRepo.addStudent(student, kurs.getID());
-            studentenRepo.addKurs(student, kurs);
-            return true;
+            if(!studentenRepo.containsKurs(kurs.getID(), student))
+            {
+                kursRepo.addStudent(student, kurs.getID());
+                studentenRepo.addKurs(student, kurs);
+                return true;
+            }
+
         }
         return false;
     }
@@ -194,4 +213,6 @@ public class KursController implements Controller<Kurs> {
     {
         return kursRepo.containsID(id);
     }
+
+
 }

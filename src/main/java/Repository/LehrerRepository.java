@@ -114,8 +114,7 @@ public class LehrerRepository extends InMemoryRepository<Lehrer> implements File
         for (JsonNode pm : parser)
         {
 
-            long idLehrer = pm.path("lehrerID").asInt();
-
+            long idLehrer = pm.path("lehrerID").asLong();
             if(id == idLehrer)
             {
                 String vorName = pm.path("vorname").asText();
@@ -230,11 +229,25 @@ public class LehrerRepository extends InMemoryRepository<Lehrer> implements File
      * löscht einen Kurs von allen Professoren aus dem RepoList
      * @param kurs, den man löscht
      */
-    public void deleteKursFromAll(Kurs kurs)
-    {
+    public void deleteKursFromAll(Kurs kurs) throws IOException {
         for(Lehrer lehrer : repoList)
         {
             lehrer.loschenKurs(kurs);
         }
+        writeToFile();
+
+    }
+
+    public void addKurs(long id, Kurs kurs) throws IOException {
+
+        Lehrer lehrer = null;
+        for(Lehrer lehrer2 : repoList)
+        {
+            if(id == lehrer2.getLehrerID())
+                lehrer = lehrer2;
+        }
+        assert lehrer != null;
+        lehrer.addKurs(kurs);
+        writeToFile();
     }
 }
