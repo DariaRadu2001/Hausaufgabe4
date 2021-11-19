@@ -46,7 +46,7 @@ class KursControllerTest {
     @Test
     void create() throws IOException, DasElementExistiertException {
         input();
-        
+
 
     }
 
