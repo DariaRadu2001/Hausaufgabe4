@@ -134,6 +134,12 @@ public class StudentController implements Controller<Student>{
         return studentenRepo.containsID(id);
     }
 
+    /**
+     * überprüft, ob ein Student einen Kurs hat
+     * @param student, Student
+     * @param idKurs, Kurs
+     * @return true, wenn wahr, wenn falsch false
+     */
     public boolean containsKurs(Student student, long idKurs)
     {
         return studentenRepo.containsKurs(idKurs, student);

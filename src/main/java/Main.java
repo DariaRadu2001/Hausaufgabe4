@@ -85,11 +85,11 @@ public class Main {
         //System.out.println( kursRepository.getKurseFreiePlatzen());
         */
 
-        KursRepository kursRepository = new KursRepository();
+        KursRepository kursRepository = new KursRepository("kurs.json");
         kursRepository.readFromFile();
-        LehrerRepository lehrerRepository = new LehrerRepository();
+        LehrerRepository lehrerRepository = new LehrerRepository("lehrer.json");
         lehrerRepository.readFromFile();
-        StudentRepository studentRepository = new StudentRepository();
+        StudentRepository studentRepository = new StudentRepository("student.json");
         studentRepository.readFromFile();
         KursController kursController = new KursController(kursRepository,studentRepository,lehrerRepository);
         LehrerController lehrerController = new LehrerController(lehrerRepository,studentRepository,kursRepository);

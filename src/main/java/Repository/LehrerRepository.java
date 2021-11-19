@@ -12,9 +12,11 @@ import java.util.List;
 
 public class LehrerRepository extends InMemoryRepository<Lehrer> implements FileRepository<Lehrer>{
 
+    String file;
 
-    public LehrerRepository() {
+    public LehrerRepository(String file) {
         super();
+        this.file = file;
     }
 
     @Override

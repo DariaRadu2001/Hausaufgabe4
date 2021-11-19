@@ -14,8 +14,11 @@ import java.util.*;
 
 public class KursRepository extends InMemoryRepository<Kurs> implements FileRepository<Kurs>{
 
-    public KursRepository() {
+    String file;
+
+    public KursRepository(String file) {
         super();
+        this.file = file;
     }
 
     @Override
@@ -33,7 +36,7 @@ public class KursRepository extends InMemoryRepository<Kurs> implements FileRepo
     @Override
     public List<Kurs> readFromFile() throws IOException {
 
-        Reader reader = new BufferedReader(new FileReader("kurs.json"));
+        Reader reader = new BufferedReader(new FileReader(file));
         ObjectMapper objectMapper = new ObjectMapper();
         JsonNode parser = objectMapper.readTree(reader);
 
@@ -74,7 +77,7 @@ public class KursRepository extends InMemoryRepository<Kurs> implements FileRepo
 
         ObjectWriter writer = objectMapper.writer(new DefaultPrettyPrinter());
 
-        writer.writeValue(new File("kurs.json"), repoList);
+        writer.writeValue(new File(file), repoList);
 
     }
 
@@ -87,7 +90,7 @@ public class KursRepository extends InMemoryRepository<Kurs> implements FileRepo
     @Override
     public Kurs findOne(Long idKurs) throws IOException
     {
-        Reader reader = new BufferedReader(new FileReader("kurs.json"));
+        Reader reader = new BufferedReader(new FileReader(file));
         ObjectMapper objectMapper = new ObjectMapper();
         JsonNode parser = objectMapper.readTree(reader);
 

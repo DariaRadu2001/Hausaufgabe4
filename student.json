@@ -14,4 +14,12 @@
   "angeschriebeneKurse" : [ 1, 2 ],
   "notwendigeKredits" : 18,
   "anzahlKurse" : 2
+}, {
+  "vorname" : "Ioana",
+  "nachname" : "Tincu",
+  "studentID" : 3,
+  "totalKredits" : 0,
+  "angeschriebeneKurse" : [ ],
+  "notwendigeKredits" : 30,
+  "anzahlKurse" : 0
 } ]

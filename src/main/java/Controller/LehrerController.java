@@ -165,6 +165,12 @@ public class LehrerController implements Controller<Lehrer>{
         lehrerRepo.deleteKursFromAll(kurs);
     }
 
+    /**
+     * legt zu einen Lehrer einen Kurs
+     * @param lehrer, Lehrer
+     * @param kurs, Kurs
+     * @throws IOException, fur Schreiben im File
+     */
     public void addKurs(long lehrer, Kurs kurs) throws IOException {
         lehrerRepo.addKurs(lehrer, kurs);
     }

@@ -48,6 +48,9 @@ public class KonsoleView {
         this.studentController = studentController;
     }
 
+    /**
+     * Menu fur UI
+     */
     public void getMenu()
     {
         System.out.println("""
@@ -63,6 +66,9 @@ public class KonsoleView {
                 """);
     }
 
+    /**
+     * der UI
+     */
     public void start() throws IOException, DasElementExistiertException, ListIsEmptyException, InterruptedException {
         while(true)
         {
@@ -169,6 +175,10 @@ public class KonsoleView {
 
     }
 
+    /**
+     * der User gibt die Attribute einem Studenten
+     * @return Student
+     */
     public Student createStudent()
     {
         Scanner scan= new Scanner(System.in);
@@ -186,6 +196,10 @@ public class KonsoleView {
 
     }
 
+    /**
+     * der User gibt die Attribute einem Lehrer
+     * @return Lehrer
+     */
     public Lehrer createLehrer()
     {
         Scanner scan= new Scanner(System.in);
@@ -203,6 +217,10 @@ public class KonsoleView {
 
     }
 
+    /**
+     * der User gibt die Attribute einem Kurs
+     * @return Kurs
+     */
     public Kurs createKurs()
     {
         Scanner scan= new Scanner(System.in);
@@ -237,6 +255,9 @@ public class KonsoleView {
 
     }
 
+    /**
+     * Menu fur UI
+     */
     public void getMenuSortFilter()
     {
         System.out.println("""
@@ -247,6 +268,10 @@ public class KonsoleView {
                 """);
     }
 
+    /**
+     * Ui und Anwendung fur Sort und Filter Methoden
+     * @throws InterruptedException, fur Wartezeit
+     */
     public void getFunctionSortFilter() throws InterruptedException {
         Scanner scan= new Scanner(System.in);
         int key;
@@ -278,6 +303,9 @@ public class KonsoleView {
         }
     }
 
+    /**
+     * Menu fur UI
+     */
     public void getAddMenu()
     {
         System.out.println("""
@@ -287,6 +315,11 @@ public class KonsoleView {
                 """);
     }
 
+    /**
+     * Ui und Anwendung fur Add Methoden
+     * @throws IOException, fur Schreiben im File
+     * @throws DasElementExistiertException, das Element existiert in der Liste
+     */
     public void getFunctionAdd() throws IOException, DasElementExistiertException {
         Scanner scan= new Scanner(System.in);
         int key;
@@ -312,6 +345,9 @@ public class KonsoleView {
         }
     }
 
+    /**
+     * Menu fur UI
+     */
     public void getMenuShow()
     {
         System.out.println("""
@@ -321,6 +357,10 @@ public class KonsoleView {
                 """);
     }
 
+    /**
+     * Ui und Anwendung fur Add Methoden
+     * @throws InterruptedException, fur Wartezeit
+     */
     public void getFunctionGetAll() throws InterruptedException {
         Scanner scan= new Scanner(System.in);
         int key;
