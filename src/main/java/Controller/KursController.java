@@ -181,7 +181,6 @@ public class KursController implements Controller<Kurs> {
         return false;
     }
 
-
     /**
      * ein Student will bei einem Kurs teilnehmen
      * @param student, der sich zu dem Kurs anschreibt

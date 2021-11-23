@@ -197,7 +197,7 @@ public class KursRepository extends InMemoryRepository<Kurs> implements FileRepo
     }
 
     /**
-     * filtert die Liste nach die Anzahl von ECTS(die Kurse die >5 ECTS haben)
+     * filtert die Liste nach die Anzahl von ECTS(die Kurse die > 5 ECTS haben)
      * @return die gefilterte Liste
      */
     public List<Kurs> filterList()

@@ -60,7 +60,7 @@ public class LehrerRepository extends InMemoryRepository<Lehrer> implements File
      */
     @Override
     public List<Lehrer> readFromFile() throws IOException {
-        Reader reader = new BufferedReader(new FileReader("lehrer.json"));
+        Reader reader = new BufferedReader(new FileReader(file));
         ObjectMapper objectMapper = new ObjectMapper();
         JsonNode parser = objectMapper.readTree(reader);
 
@@ -97,7 +97,7 @@ public class LehrerRepository extends InMemoryRepository<Lehrer> implements File
 
         ObjectWriter writer = objectMapper.writer(new DefaultPrettyPrinter());
 
-        writer.writeValue(new File("lehrer.json"), repoList);
+        writer.writeValue(new File(file), repoList);
 
     }
 
@@ -109,7 +109,7 @@ public class LehrerRepository extends InMemoryRepository<Lehrer> implements File
      */
     @Override
     public Lehrer findOne(Long id) throws IOException {
-        Reader reader = new BufferedReader(new FileReader("lehrer.json"));
+        Reader reader = new BufferedReader(new FileReader(file));
         ObjectMapper objectMapper = new ObjectMapper();
         JsonNode parser = objectMapper.readTree(reader);
 

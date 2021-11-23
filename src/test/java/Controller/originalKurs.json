@@ -1,28 +1,28 @@
 [ {
-  "name" : "Baze de date",
+  "name" : "DB",
   "lehrer" : 1,
-  "maximaleAnzahlStudenten" : 30,
+  "maximaleAnzahlStudenten" : 300,
   "listeStudenten" : [ ],
+  "ects" : 26,
   "id" : 1,
-  "ects" : 10,
-  "anzahlFreienPlatze" : 30,
+  "anzahlFreienPlatze" : 300,
   "tFrei" : true
 }, {
   "name" : "MAP",
   "lehrer" : 2,
-  "maximaleAnzahlStudenten" : 25,
+  "maximaleAnzahlStudenten" : 0,
   "listeStudenten" : [ 2, 3 ],
-  "id" : 2,
   "ects" : 5,
-  "anzahlFreienPlatze" : 23,
-  "tFrei" : true
+  "id" : 2,
+  "anzahlFreienPlatze" : -2,
+  "tFrei" : false
 }, {
   "name" : "DSA",
   "lehrer" : 1,
   "maximaleAnzahlStudenten" : 30,
   "listeStudenten" : [ 3, 4 ],
-  "id" : 3,
   "ects" : 4,
+  "id" : 3,
   "anzahlFreienPlatze" : 28,
   "tFrei" : true
 } ]
