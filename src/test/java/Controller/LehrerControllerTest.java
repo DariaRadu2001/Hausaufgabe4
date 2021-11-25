@@ -52,7 +52,6 @@ class LehrerControllerTest {
         input();
         this.lehrerController.create(pop);
         assertEquals(4,this.lehrerController.getAll().size());
-        this.lehrerController.delete(100L);
     }
 
     @Test
@@ -89,7 +88,6 @@ class LehrerControllerTest {
     @Description("Löscht ein Element aus der RepoListe")
     void delete() throws IOException {
         input();
-        this.lehrerController.create(pop);
         this.lehrerController.delete(100L);
         assertEquals(3,this.lehrerController.getAll().size());
     }
@@ -146,7 +144,6 @@ class LehrerControllerTest {
     @Description("Legt einem Kurs zum einem Lehrer hin")
     void addKurs() throws IOException {
         input();
-        Kurs kurs = new Kurs(5000,10);
         List<Long> kurse = new ArrayList<>();
         kurse.add(5000L);
         Lehrer lehrer = new Lehrer("Ana","Lob",kurse,3000);

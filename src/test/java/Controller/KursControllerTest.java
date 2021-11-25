@@ -54,11 +54,7 @@ class KursControllerTest {
     void create() throws IOException, DasElementExistiertException {
         input();
         dataBase = new Kurs(100,"Baze de date", 1, 30, 26);
-        this.kursController.create(dataBase);
-        assertEquals(4,this.kursController.getAll().size());
-        Lehrer lehrer = this.kursController.getLehrerRepo().findOne(1L);
-        this.kursController.getLehrerRepo().loschenKurs(lehrer,dataBase);
-        this.kursController.delete(100L);
+        assertEquals(this.kursController.create(dataBase),dataBase);
 
     }
 
@@ -105,12 +101,9 @@ class KursControllerTest {
 
     @Test
     @Description("Löscht ein Element aus der RepoListe")
-    void delete() throws IOException, DasElementExistiertException {
+    void delete() throws IOException {
         input();
-        dataBase = new Kurs(100,"Baze de date", 1, 30, 26);
-        this.kursController.create(dataBase);
-        this.kursController.delete(100L);
-        assertEquals(3,this.kursController.getAll().size());
+        assertTrue(this.kursController.delete(100L));
     }
 
     @Test
@@ -191,7 +184,7 @@ class KursControllerTest {
     @Description("ändert die ECTS eines Kurses, der nicht existiert, nicht")
     void andernECTSNicht() throws IOException, ListIsEmptyException {
         input();
-        assert(!this.kursController.andernECTS(100,100L));
+        assertFalse(this.kursController.andernECTS(100,100L));
     }
 
     @Test
@@ -200,7 +193,7 @@ class KursControllerTest {
         input();
         Student student = new Student("Anca","Maria",100L);
         Kurs kurs = this.kursController.findOne(1L);
-        assert(!this.kursController.register(student,kurs));
+        assertFalse(this.kursController.register(student,kurs));
     }
 
     @Test
@@ -209,10 +202,9 @@ class KursControllerTest {
         input();
         Student student = this.studentRepository.findOne(423L);
         Kurs kurs = this.kursController.findOne(1L);
-        Kurs kurs2 = kurs;
         assert(this.kursController.register(student,kurs));
         this.kursController.getStudentenRepo().loschenKurs(kurs);
-        this.kursController.update(kurs2);
+        this.kursController.update(kurs);
 
     }
 
@@ -225,7 +217,7 @@ class KursControllerTest {
 
     @Test
     @Description("Schaut ob wir in der Liste einem Kurs mit einem ID haben")
-    void containsIDnicht() throws IOException {
+    void containsIDNicht() throws IOException {
         input();
         assertFalse(this.kursController.containsID(100L));
     }

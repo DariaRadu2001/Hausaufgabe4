@@ -1,7 +1,6 @@
 package Controller;
 
 import Modele.Kurs;
-import Modele.Lehrer;
 import Modele.Student;
 import Repository.KursRepository;
 import Repository.LehrerRepository;

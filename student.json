@@ -7,14 +7,6 @@
   "notwendigeKredits" : 30,
   "anzahlKurse" : 0
 }, {
-  "vorname" : "Daria",
-  "nachname" : "Radu",
-  "studentID" : 1,
-  "totalKredits" : 12,
-  "angeschriebeneKurse" : [ 1, 2 ],
-  "notwendigeKredits" : 18,
-  "anzahlKurse" : 2
-}, {
   "vorname" : "Ioana",
   "nachname" : "Tincu",
   "studentID" : 3,
@@ -22,4 +14,12 @@
   "angeschriebeneKurse" : [ ],
   "notwendigeKredits" : 30,
   "anzahlKurse" : 0
+}, {
+  "vorname" : "Daria",
+  "nachname" : "Radu",
+  "studentID" : 1,
+  "totalKredits" : 12,
+  "angeschriebeneKurse" : [ 1, 2 ],
+  "notwendigeKredits" : 18,
+  "anzahlKurse" : 2
 } ]

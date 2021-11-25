@@ -60,8 +60,8 @@ public class StudentController implements Controller<Student>{
      * @return true, wenn man das Element löscht, false wenn man nichts tut
      */
     @Override
-    public boolean delete(Long objID) {
-        return delete(objID);
+    public boolean delete(Long objID) throws IOException {
+        return studentenRepo.delete(objID);
     }
 
 
