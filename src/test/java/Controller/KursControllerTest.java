@@ -11,6 +11,7 @@ import org.junit.jupiter.api.Test;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.NoSuchElementException;
 import java.util.Objects;
 
 import Exception.ListIsEmptyException;
@@ -72,13 +73,8 @@ class KursControllerTest {
     void updateElementNichtInDerListe() throws IOException {
         input();
         dataBase = new Kurs(100,"Baze de date", 1, 30, 26);
-        try{
-            kursController.update(dataBase);
-        }
-        catch (Exception e)
-        {
-            assert(true);
-        }
+        assertThrows(NoSuchElementException.class, ()->kursController.update(dataBase));
+
     }
 
     @Test
@@ -89,14 +85,22 @@ class KursControllerTest {
         kursController.update(dataBase);
         Kurs kurs = kursController.findOne(1L);
         System.out.println(kurs);
+        boolean wahr;
+
         if(kurs.getID() == dataBase.getID() &&
                 Objects.equals(kurs.getName(), dataBase.getName()) &&
         kurs.getLehrer() == dataBase.getLehrer() &&
         kurs.getMaximaleAnzahlStudenten() == dataBase.getMaximaleAnzahlStudenten() &&
         kurs.getEcts() == dataBase.getEcts())
-            assert(true);
+            {
+                wahr = true;
+            }
         else
-            assert(false);
+            {
+                wahr = false;
+            }
+
+        assertTrue(wahr);
     }
 
     @Test
@@ -110,16 +114,16 @@ class KursControllerTest {
     @Description("Findet einen Element in dem File nach Id")
     void findOne() throws IOException {
         input();
+        boolean wahr;
         Kurs kurs = this.kursController.findOne(1L);
         Kurs kurs2 = new Kurs(1,"DB",1,300,new ArrayList<>(),26);
-        if(kurs.getID() == kurs2.getID() &&
+        wahr = kurs.getID() == kurs2.getID() &&
                 Objects.equals(kurs.getName(), kurs2.getName()) &&
                 kurs.getLehrer() == kurs2.getLehrer() &&
                 kurs.getMaximaleAnzahlStudenten() == kurs2.getMaximaleAnzahlStudenten() &&
-                kurs.getEcts() == kurs2.getEcts())
-            assert(true);
-        else
-            assert(false);
+                kurs.getEcts() == kurs2.getEcts();
+
+        assertTrue(wahr);
     }
 
     @Test
@@ -176,7 +180,7 @@ class KursControllerTest {
     @Description("ändert die ECTS eines Kurses")
     void andernECTS() throws IOException, ListIsEmptyException {
         input();
-        assert(this.kursController.andernECTS(100,1L));
+        assertTrue(this.kursController.andernECTS(100,1L));
         this.kursController.andernECTS(26,1L);
     }
 
@@ -202,7 +206,7 @@ class KursControllerTest {
         input();
         Student student = this.studentRepository.findOne(423L);
         Kurs kurs = this.kursController.findOne(1L);
-        assert(this.kursController.register(student,kurs));
+        assertTrue(this.kursController.register(student,kurs));
         this.kursController.getStudentenRepo().loschenKurs(kurs);
         this.kursController.update(kurs);
 
@@ -212,7 +216,7 @@ class KursControllerTest {
     @Description("Schaut ob wir in der Liste einem Kurs mit einem ID haben")
     void containsID() throws IOException {
         input();
-        assert(this.kursController.containsID(1L));
+        assertTrue(this.kursController.containsID(1L));
     }
 
     @Test

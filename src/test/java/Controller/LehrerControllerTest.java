@@ -70,16 +70,14 @@ class LehrerControllerTest {
         kurse.add(2L);
         kurse.add(3L);
         kurse.add(4L);
+        boolean wahr;
         Lehrer lehrer = new Lehrer("Mihaela","Inge",kurse,3);
         lehrerController.update(lehrer);
         Lehrer lehrer2 = lehrerController.findOne(3L);
-        if(lehrer.getLehrerID() == lehrer2.getLehrerID() && lehrer.getKurse().equals(lehrer2.getKurse()) &&
+        wahr = lehrer.getLehrerID() == lehrer2.getLehrerID() && lehrer.getKurse().equals(lehrer2.getKurse()) &&
                 Objects.equals(lehrer.getVorname(), lehrer2.getVorname()) &&
-                Objects.equals(lehrer.getNachname(), lehrer2.getNachname()))
-            assert(true);
-        else
-            assert(false);
-
+                Objects.equals(lehrer.getNachname(), lehrer2.getNachname());
+        assertTrue(wahr);
         Lehrer lehrer3 = new Lehrer("Sommer","Inge",kurse,3);
         lehrerController.update(lehrer3);
     }
@@ -99,15 +97,13 @@ class LehrerControllerTest {
         Lehrer lehrer = this.lehrerController.findOne(2L);
         List<Long> kurse = new ArrayList<>();
         kurse.add(3L);
+        boolean wahr;
         this.lehrerController.getAll();
         Lehrer lehrer2 = new Lehrer("Catalin","Rusu",kurse,2L);
-        if(lehrer.getLehrerID() == lehrer2.getLehrerID() && lehrer.getKurse().equals(lehrer2.getKurse()) &&
+        wahr = lehrer.getLehrerID() == lehrer2.getLehrerID() && lehrer.getKurse().equals(lehrer2.getKurse()) &&
                 Objects.equals(lehrer.getVorname(), lehrer2.getVorname()) &&
-                Objects.equals(lehrer.getNachname(), lehrer2.getNachname())
-                )
-            assert(true);
-        else
-            assert(false);
+                Objects.equals(lehrer.getNachname(), lehrer2.getNachname());
+        assertTrue(wahr);
     }
 
     @Test
@@ -136,7 +132,7 @@ class LehrerControllerTest {
     @Description("Überprüft ob ein Id in der Liste existiert")
     void containsID() throws IOException {
         input();
-        assert(this.lehrerController.containsID(1L));
+        assertTrue(this.lehrerController.containsID(1L));
 
     }
 

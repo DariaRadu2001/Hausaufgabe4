@@ -5,8 +5,8 @@
   "listeStudenten" : [ ],
   "ects" : 26,
   "id" : 1,
-  "anzahlFreienPlatze" : 300,
-  "tFrei" : true
+  "tFrei" : true,
+  "anzahlFreienPlatze" : 300
 }, {
   "name" : "MAP",
   "lehrer" : 2,
@@ -14,8 +14,8 @@
   "listeStudenten" : [ 2, 3 ],
   "ects" : 5,
   "id" : 2,
-  "anzahlFreienPlatze" : -2,
-  "tFrei" : false
+  "tFrei" : false,
+  "anzahlFreienPlatze" : -2
 }, {
   "name" : "DSA",
   "lehrer" : 1,
@@ -23,6 +23,6 @@
   "listeStudenten" : [ 3, 4 ],
   "ects" : 4,
   "id" : 3,
-  "anzahlFreienPlatze" : 28,
-  "tFrei" : true
+  "tFrei" : true,
+  "anzahlFreienPlatze" : 28
 } ]
